@@ -32,8 +32,15 @@ namespace APITestValidacion.Controllers
 
         // POST api/<PersonasController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("Nuevo")]
+        public IActionResult Post([FromBody] ClasePersona persona)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
         }
 
         // PUT api/<PersonasController>/5

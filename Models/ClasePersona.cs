@@ -1,8 +1,11 @@
-﻿namespace APITestValidacion.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace APITestValidacion.Models
 {
     public class ClasePersona
     {
         // DNI / Pasaporte / NIE / ...
+        [Required]
         public string Identificador { get; set; } = "";
 
         public string Nombre { get; set; } = "";
