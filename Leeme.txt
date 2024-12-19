@@ -1,3 +1,9 @@
 ﻿Para ver la API generada
 https://localhost:7150/openapi/v1.json
 
+Alternativa a Swagger, Scalar
+https://localhost:7150/scalar/v1
+
+
+
+

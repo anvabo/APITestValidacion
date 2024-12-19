@@ -23,7 +23,11 @@ builder.Services.AddControllers(o =>
 {
     o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
     o.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
+}).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
 });
+
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
