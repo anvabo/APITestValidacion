@@ -3,16 +3,15 @@ using System.Text.RegularExpressions;
 
 namespace APITestValidacion.Models.Atributos
 {
-    public class CorreoUAAttribute : ValidationAttribute
+    public class UrlUAAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value is string correo)
+            if (value is string url)
             {
-                if (!string.IsNullOrEmpty(correo)) {
-                    string pattern = @"^[\w\.-]+@([\w-]+\.)*ua\.es$";
-                    //string pattern = @"@.*ua\.es$";
-                    bool isMatch = Regex.IsMatch(correo, pattern);
+                if (!string.IsNullOrEmpty(url)) {
+                    string pattern = @"^(https?:\/\/)?([\w\-]+\.)*ua\.es(\/.*)?$";
+                    bool isMatch = Regex.IsMatch(url, pattern);
 
                     if (isMatch) {
                         return ValidationResult.Success;

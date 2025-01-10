@@ -22,6 +22,12 @@ namespace APITestValidacion.Models
 
         [EmailAddress]
         public string EmailPersonal { get; set; } = "";
+
+        [Url]
+        [UrlUA]
+        public string UrlUA { get; set; } = "";
+
+        [Url]
         public string UrlPersonal { get; set; } = "";
 
         public DateOnly FechaNacimiento { get; set; }
@@ -29,10 +35,14 @@ namespace APITestValidacion.Models
         [Range(0, 100, ErrorMessage = "El porcentaje debe ser entre 0 y 100")]
         public double PorcentajePerfil { get; set; } = 0;
 
+        [MinLength(1, ErrorMessage = "Una persona debe tener al menos un perfil")]
+        [MaxLength(3, ErrorMessage = "Una persona no puede tener más de tres perfiles")]
         public List<ClasePerfiles> Perfiles { get; set; } = new List<ClasePerfiles>();
 
         [FileExtensions(Extensions = "jpg,png,pdf", ErrorMessage = "La foto debe tener el formato .jpg, .png o .pdf.")]
         public IFormFile? Foto { get; set; }
+
+
 
     }
 }

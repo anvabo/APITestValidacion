@@ -12,9 +12,10 @@ Accept-Language: en-US,en;q=0.5
     "Identificador": "1",
     "nombre": "Pedro",
     "apellidos": "Martínez",
-    "emailUA": "pm@ua.es",
+    "emailUA": "pm@gua.es",
     "emailPersonal": "pm@gmail.com",
-    "urlPersonal": "https://www.ua.es",
+    "urlUA": "https://www.ua.es",
+    "urlPersonal": "https://www.elpais.es",
     "fechaNacimiento": "2004-12-18",
     "PorcentajePerfil": 100,
     "Perfiles": [

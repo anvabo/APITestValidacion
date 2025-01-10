@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Options;
 using Scalar.AspNetCore;
 using ua.Models;
+using Vite.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Añadimos el servicio Vite
+builder.Services.AddViteServices();
 
 //builder.Services.AddSingleton<IObjectModelValidator, NullObjectModelValidator>();
 
@@ -19,7 +23,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
-builder.Services.AddControllers(o =>
+builder.Services.AddControllersWithViews(o =>
 {
     o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
     o.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
@@ -42,10 +46,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapStaticAssets();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
+
+//app.MapControllers();
+
+// Integramos Vite
+if (builder.Environment.IsDevelopment())
+{
+    app.UseViteDevelopmentServer(true);
+}
 
 app.Run();
 
