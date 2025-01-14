@@ -10,7 +10,9 @@ namespace APITestValidacion.Models
         [Key]
         public string Identificador { get; set; } = "";
 
-        [StringLength(100)]       
+        [StringLength(100)]
+        [Required]
+
         public string Nombre { get; set; } = "";
 
         [StringLength(200)]
@@ -42,7 +44,7 @@ namespace APITestValidacion.Models
         [FileExtensions(Extensions = "jpg,png,pdf", ErrorMessage = "La foto debe tener el formato .jpg, .png o .pdf.")]
         public IFormFile? Foto { get; set; }
 
-
+        public bool Activo { get; set; } = false;
 
     }
 }

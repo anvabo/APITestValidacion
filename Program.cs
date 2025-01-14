@@ -1,3 +1,4 @@
+using APITestValidacion.Controllers;
 using APITestValidacion.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -27,6 +28,8 @@ builder.Services.AddControllersWithViews(o =>
 {
     o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
     o.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
+    o.Filters.Add<CustomModelStateErrorFilter>();
+
 }).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;

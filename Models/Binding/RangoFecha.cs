@@ -1,7 +1,10 @@
-﻿namespace APITestValidacion.Models.Binding
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace APITestValidacion.Models.Binding
 {
     public class RangoFecha : IParsable<RangoFecha>
     {
+        [Required]
         public DateOnly? From { get; init; }
         public DateOnly? To { get; init; }
 
