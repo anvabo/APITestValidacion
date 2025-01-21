@@ -28,12 +28,15 @@ builder.Services.AddControllersWithViews(o =>
 {
     o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
     o.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
-    o.Filters.Add<CustomModelStateErrorFilter>();
+    //o.Filters.Add<CustomModelStateErrorFilter>();
 
 }).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
 });
+
+// Registrar el filtro como un servicio
+builder.Services.AddScoped<CustomModelStateErrorFilter>();
 
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

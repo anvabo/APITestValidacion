@@ -20,7 +20,7 @@ namespace APITestValidacion.Controllers
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            if (!context.ModelState.IsValid)
+            if (context.ActionArguments.Values.OfType<RangoFecha>().Any() && !context.ModelState.IsValid)
             {
                 var errors = context.ModelState
                     .Where(ms => ms.Value.Errors.Count > 0)
@@ -34,8 +34,8 @@ namespace APITestValidacion.Controllers
                 // Personalizamos el mensaje de error para que sea con este formato: e.Field: [e.Errors]
                 var customErrors = errors.ToDictionary(
                     e => e.Field,
-                    e => e.Errors.Select(err => err.Contains("System.Nullable`1[System.DateOnly]")
-                        ? "El formato de la fecha es incorrecto. Debe ser dd/mm/yyyy."
+                    e => e.Errors.Select(err => err.Contains("System.Nullable`1[System.DateOnly]") || err.Contains("not valid")
+                        ? "El formato de la fecha es incorrecto. Debe ser dd/mm/yyyy,dd/mm/yyyy."
                         : err).ToArray()
                 );
 
@@ -62,6 +62,8 @@ namespace APITestValidacion.Controllers
         // GET api/<BindingController>/5
         [HttpGet]
         [Route("RangoFechas")]
+        [ServiceFilter(typeof(CustomModelStateErrorFilter))]
+
         public IActionResult RangoFechas([FromQuery] RangoFecha range)
         {
             if (!ModelState.IsValid)
